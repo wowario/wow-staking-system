@@ -1,0 +1,261 @@
+
+
+.right {
+	display: inline;
+	float: right;
+	min-width: 20%;
+}
+.left {
+	display: inline;
+	float: left;
+	min-width: 20%;
+}
+.middle-y {
+	display: flex;
+	height: 100%;
+	margin: auto;
+	align-items:center;
+	justify-content:center;
+}
+.margin-x {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.ico {
+	width:  16px;
+	height: 16px;
+}
+div {
+	word-wrap: break-word;
+}
+.nobg {
+	background-color: transparent;
+}
+button {
+	-webkit-app-region: none;
+    background-color: rgb(36, 37, 44);
+    color:rgb(140, 150, 250);
+    border:none;
+    transition: all 0.15s linear;
+    padding: 0.6vw;
+    padding-left: 0.9vw;
+    padding-right: 0.9vw;
+    min-width: 3vw;
+    min-height: 1vh;
+    outline: 10px;
+	margin: 5px;
+    border-radius: 0.8vw;
+    border: 1px solid black;
+}
+button:hover {
+    background-color: rgb(213, 220, 255);
+    color:black;
+    cursor:pointer;
+    border-color: white;
+}
+button:disabled {
+    color: gray;
+    background-color: rgb(40,40,40);
+}
+
+body {
+	background-color: rgb(16,16,16);
+	color:white;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 0px;
+	margin: 0px;
+}
+.body {
+	max-width: 100vw;
+	max-height: 100vh;
+	word-wrap: break-word;
+	user-select: none;
+	margin: 0px;
+	padding: 4px;
+}
+
+.infosBox {
+	background-color: transparent;
+	border-color: rgb(64,64,64);
+	border-width: 1px;
+	border-radius: 8px;
+	border-style: solid;
+	padding: 1vw;
+	width: fit-content;
+	display: inline-block;
+}
+legend {
+	font-size: 14px;
+}
+.centerAlign {
+	display: flex;
+	justify-content:space-around;
+}
+.select {
+	user-select: all;
+}
+.border {
+	border-color: rgb(64,64,64);
+	border-width: 1px;
+	border-radius: 8px;
+	border-style: solid;
+}
+
+.code {
+	font-family: 'Courier New', Courier, monospace;
+
+}
+.margin {
+	margin: 4px;
+	width: 100%;
+	height: min-content;
+}
+.tablink {
+	background-color: #333;
+	color: white;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	font-size: 17px;
+	width: 25%;
+	border: none;
+	border-radius: 1;
+	margin: 1px;
+}
+  
+.tablink:hover {
+	background-color: #222;
+	color:white;
+}
+  
+.tabcontent {
+	color: white;
+	display: none;
+	margin: 1vw;
+}
+.midInput {
+	max-width: 150px;
+	background-color: red;
+}
+input:not(.checkbox) {
+    appearance: none;
+    width: 350px;
+    min-height: 15px;
+    max-height: 25px;
+	margin: 4px;
+    height: 2vh;
+    outline: none;
+    background-color: rgba(0,0,0,0.5);
+    color:white;
+    border-color: black;
+    border-style:solid;
+    border-radius: 6px;
+    padding-left: 0.5vw;
+}
+
+
+.mini {
+	font-size: 9px;
+	user-select: all;
+}
+.small {
+	font-size: 11px;
+	user-select: all;
+}
+
+
+.openBtn {
+	display: flex;
+	justify-content: left;
+}
+.openButton {
+	border: none;
+	border-radius: 5px;
+	background-color: #1c87c9;
+	color: white;
+	padding: 14px 20px;
+	cursor: pointer;
+	position: fixed;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.maindiv {
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.4);
+	margin: 20px;
+    padding: calc(1vw + 10px);
+    min-width: min-content;
+	min-height: 20vh;
+	height: max-content;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+.max500 {
+	margin-right: auto;
+	margin-left: auto;
+
+	max-width: 500px;
+}
+img {
+	border-radius: 4px;
+}
+.captcha {
+	border-radius: 32px;
+	margin: 10px;
+	max-width: 256px;
+	max-height: 256px;
+    pointer-events: none;
+	user-select: none;
+}
+.captchaDiv {
+	width: fit-content;
+	height: fit-content;
+	background-color: rgba(255,255,255,0.1);
+	border-radius: 10px;
+	margin: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.quote {
+	font-size: small;
+	color: #444;
+}
+.capIn {
+	width: 128px;
+}
+
+.qr {
+	width: 300px;
+	height: 300px;
+	image-rendering: crisp-edges;
+	border-radius: 50px;
+	margin:auto;
+}
+
+code {
+	background-color: rgba(255,255,255,0.1);
+	user-select: all;
+
+}
+
+li {
+	margin-top: 10px;
+}
+th, td {
+	border: 2px solid #444;
+	margin: 0px;
+	
+}
+table {
+	border-spacing:0; /* Removes the cell spacing via CSS */
+	border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
+}

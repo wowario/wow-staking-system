@@ -1,0 +1,77 @@
+<div class="maindiv max500">
+	<h1 style="display: inline">FAQ</h1><br>
+	<h2>How do I stake Wownero?</h2>
+	<p>
+		This staking method is non-custodial, meaning you have compete control over your private keys.
+		<b>500 WOW is the minimum amount</b> needed to earn rewards from staking.</p><p>
+		You will need to have two wallets: a new wallet, which will be used to lock the funds in ("<b>wallet A</b>") and
+		a second wallet with some WOW ("<b>wallet B</b>").<br>
+		Do not use <b>wallet A</b> for ordinary transactions, think of <b>wallet A</b> more as a "<b>CD account</b>".
+	</p>
+	<ul>
+		<li>Download latest <a href="https://git.wownero.com/wownero/wownero/releases">Wownero binaries</a></li>
+
+		<li>Open terminal, run <code>wownerod</code> to sync with network (takes about 30 minutes)</li>
+
+		<li>Once synced, open new terminal tab, run <code>wownero-wallet-cli</code>, create a new wallet ("<b>wallet A</b>"), write down the
+			seed and keep it safe offline, just in case your need to recover the wallet!</li>
+
+		<li>In another tab, open a second wallet with some WOW ("<b>wallet B</b>")</li>
+
+		<li>From <b>wallet B</b>, transfer the amount you would like to lock + some change to cover the transaction fees
+			(something like 0.05 WOW)
+			to <b>wallet A</b>.
+		</li>
+
+		<li>
+			Go back to <b>wallet A</b>, wait for the transaction to be confirmed (takes about 15 minutes, but could take up to
+			an hour depending on network activity)
+		</li>
+
+		<li>Once transaction balance is "unlocked" (type <code>refresh</code> and balance to check status), lock the whole balance of
+			<b>wallet A</b> for 1 year (10,5192 blocks) by sending the balance back to the same wallet. Type <code>address</code> to see
+			wallet’s main address and then enter:
+
+			<code>locked_sweep_all ADDRESS 105192</code></li>
+		<li>
+			Confirm the transaction (carefully check the address and number of blocks) and then take note of the
+			transaction ID ("TXID").
+			The WOW is sent back to the <b>wallet A</b>, but the amount will be locked for 1 year. After the time has elapse,
+			the WOW is automatically released and spendable again, at which point you could sweep out the balance or
+			re-lock balance for another year.
+		</li>
+
+		<li>
+			Now you will need to get the transaction key ("TXKEY") using the TXID:
+			<code>get_tx_key TXID</code>
+		</li>
+	</ul>
+	You are done with the wallet part. Type save and exit.<br>
+
+	<ul>
+		<li>Set up
+			<a href="https://support.avax.network/en/articles/4626956-how-do-i-set-up-metamask-on-avalanche" target="_blank">MetaMask on
+				Avalanche</a>
+		</li>
+		<li>
+			<a href="stake.html">Submit staking</a> with the following informations:<br>
+
+			<code>TXID<br>
+			TXKEY<br>
+			Main address of <b>wallet A</b><br>
+			Avalanche C-chain address<br>
+			</code>
+		</li>
+	</ul>
+
+	Once the rewards program is launched on 1 January 2022, 1:1 tokens will be sent to your Avalanche address.<br>
+	<h2>Can anybody steal my Wownero?</h2>
+	<p>
+		To staking Wownero you don't have to send private keys;
+		it's only required the transaction key so that the quantity and veracity of the tx can be verified.
+	</p>
+	<h2>Once i locked my wallet, can I unlock it?</h2>
+	<p>
+		No. Please be careful, as once the wallet is locked you will have to wait one year before accessing your funds again.
+	</p>
+</div>

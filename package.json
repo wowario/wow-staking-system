@@ -1,0 +1,32 @@
+{
+	"name": "wow-staking-system",
+	"version": "1.0.0",
+	"description": "A Staking System for WowneroX",
+	"main": "index.js",
+	"scripts": {
+		"test": "node index.js",
+		"start": "node index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wownerox/wow-staking-system.git"
+	},
+	"keywords": [
+		"Wownero",
+		"Bitcoin",
+		"WowneroX",
+		"Cryptocurrency"
+	],
+	"author": "Fede",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/wownerox/wow-staking-system/issues"
+	},
+	"homepage": "https://github.com/wownerox/wow-staking-system",
+	"dependencies": {
+		"ppfun-captcha": "^1.6.6",
+		"clean-css": "^4.2.4",
+		"express": "^14.17.1",
+		"html-minifier": "^4.0.0"
+	}
+}
