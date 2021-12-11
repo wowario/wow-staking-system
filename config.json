@@ -1,6 +1,5 @@
 {
-	"port": 8080,
-	"session-secret": "changeme",
+	"port": 4006,
 	"admin_password": "long-safe-string",
 	"minimum_stake": 500,
 	"daemon": {
