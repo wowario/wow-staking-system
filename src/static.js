@@ -23,7 +23,6 @@ setInterval(()=>{
 
 
 module.exports.serve = (req, res) => {
-	DEBUG = is_debug;
 	var url = req.url.split("?")[0]
 	if (url.endsWith("/")) {
 		url += "index.html"
