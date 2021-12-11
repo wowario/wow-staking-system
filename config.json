@@ -1,0 +1,14 @@
+{
+	"port": 8080,
+	"session-secret": "changeme",
+	"admin_password": "long-safe-string",
+	"minimum_stake": 500,
+	"daemon": {
+		"ip": "node.suchwow.xyz",
+		"port": 34568
+	},
+	"wallet_rpc": {
+		"ip": "127.0.0.1",
+		"port": 34567
+	}
+}

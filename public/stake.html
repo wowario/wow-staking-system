@@ -1,0 +1,14 @@
+<div class="maindiv max500">
+	<h1 style="display: inline">Submit stake request</h1><br>
+
+	<form action="/stake" method="post">
+		<div class="captchaDiv"><img src="/captcha" class="captcha" alt="Captcha"><input class="midInput" placeholder="Captcha" name="captcha" autocomplete=off></div>
+
+		<input required name="txid" placeholder="TXID">
+		<input required name="txkey" placeholder="TXKEY">
+		<input required name="wallet_a" placeholder="Wallet A main address">
+		<input required name="avax_addr" placeholder="Avalanche address"><br>
+		<button type=submit>Submit</button>
+	</form>
+
+</div>
