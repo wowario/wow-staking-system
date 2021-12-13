@@ -48,7 +48,7 @@ module.exports.serve = (req, res) => {
 					removeRedundantAttributes: true,
 
 				})
-			res.status(200).end(filesCache[url])
+			return res.status(200).end(filesCache[url])
 		} else if (url.endsWith(".css")) {
 			filesCache[url] = cleanCSS.minify(data.toString()).styles
 
