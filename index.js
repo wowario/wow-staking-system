@@ -8,6 +8,7 @@ const staticContent = require("./src/static")
 const daemon = require("./src/daemon_rpc")
 const wallet = require("./src/wallet_rpc")
 const db = require("./src/database")
+const session = require("express-session");
 
 const WowDaemon = new daemon(config.daemon.ip || "node.suchwow.xyz", config.daemon.port || 34568)
 const WowWallet = new wallet(config.wallet_rpc.ip || "127.0.0.1", config.wallet_rpc.port || 34567)
@@ -34,6 +35,12 @@ app.use(express.urlencoded({
 	extended: true
 }))
 app.use(express.json())
+app.use(session({
+	secret: config.admin_password,
+	resave: true,
+	saveUninitialized: true
+}));
+
 
 
 var server = app.listen(config.port, "0.0.0.0", function () {
