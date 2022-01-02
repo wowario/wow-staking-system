@@ -13,15 +13,41 @@ const session = require("express-session");
 const WowDaemon = new daemon(config.daemon.ip || "node.suchwow.xyz", config.daemon.port || 34568)
 const WowWallet = new wallet(config.wallet_rpc.ip || "127.0.0.1", config.wallet_rpc.port || 34567)
 
+function LOG(text) {
+	const date_ob = new Date();
+	const time = date_ob.getHours() + ":" + date_ob.getMinutes() + ":" + date_ob.getSeconds() + " [info]\t"
+	console.log(time + text + "\x1b[0m")
+}
+function WARN(text) {
+	const date_ob = new Date();
+	const time = date_ob.getHours() + ":" + date_ob.getMinutes() + ":" + date_ob.getSeconds() + " [WARN]\x1b[1m\x1b[33m\t"
+	console.warn(time + text + "\x1b[0m")
+}
+function ERR(text) {
+	const date_ob = new Date();
+	const time = date_ob.getHours() + ":" + date_ob.getMinutes() + ":" + date_ob.getSeconds() + " [ERR]\x1b[1m\x1b[31m\t"
+	console.error(time + text + "\x1b[0m")
+}
 
-var blocksCount = 377615;
+
+if (config.admin_password === "enter-password-here") {
+	ERR("You must set the password in config.json.")
+	process.exit(1)
+}
+
+var blocksCount = 384048;
 
 WowDaemon.get_block_count().then((data) => {
 	blocksCount = data.count;
 })
+setInterval(()=>{
+	WowDaemon.get_block_count().then((data) => {
+		blocksCount = data.count;
+	})	
+}, 60000)
 
 
-const DEBUG = false;
+const DEBUG = true;
 
 var statusMsg = staticContent.statusMsg
 
@@ -62,21 +88,6 @@ app.use(function (err, req, res, next) {
 
 // Utility functions
 {
-	function LOG(text) {
-		const date_ob = new Date();
-		const time = date_ob.getHours() + ":" + date_ob.getMinutes() + ":" + date_ob.getSeconds() + " [info]\t"
-		console.log(time + text + "\x1b[0m")
-	}
-	function WARN(text) {
-		const date_ob = new Date();
-		const time = date_ob.getHours() + ":" + date_ob.getMinutes() + ":" + date_ob.getSeconds() + " [WARN]\x1b[1m\x1b[33m\t"
-		console.warn(time + text + "\x1b[0m")
-	}
-	function ERR(text) {
-		const date_ob = new Date();
-		const time = date_ob.getHours() + ":" + date_ob.getMinutes() + ":" + date_ob.getSeconds() + " [ERR]\x1b[1m\x1b[31m\t"
-		console.error(time + text + "\x1b[0m")
-	}
 
 	function redirectTo(url) {
 		return `<!DOCTYPE HTML><body><meta http-equiv="Refresh" content="0; url='${url}'"></body>`
@@ -128,9 +139,16 @@ app.use(function (err, req, res, next) {
 
 			var lockedTime = data.txs[0].as_json.unlock_time - data.txs[0].block_height
 
+			
+
 			if (lockedTime < 105180)
 				return res.status(400).end(statusMsg(`Sorry, but your lock time is too small.<br>
 Maybe you didn't lock the transaction properly.<br><a href="stake.html"><button>Back</button></a>`))
+
+			if (data.txs[0].block_height + 12 * 24 * config.tx_submit_limit_days < blocksCount){ // 12 = 1 hour; 12 * 24 = 1 day; 12*24*30 = 1 month
+				return res.status(400).end(statusMsg(`Transactions older than ${config.tx_submit_limit_days} days can't be locked.<br><a href="stake.html"><button>Back</button></a>`))
+
+			}
 
 			WowWallet.check_tx_key(req.body.txid, req.body.txkey, req.body.wallet_a).then((data2) => {
 				if (data2.in_pool || data2.confirmations < 2) {
@@ -150,11 +168,11 @@ Maybe you didn't lock the transaction properly.<br><a href="stake.html"><button>
 					
 					theList = null;
 
-					return res.status(200).end(statusMsg(`Successfully staked ${staked}wow.<br>
-					${staked}wowx will be sent to your wallet within 48 hours.`))
+					return res.status(200).end(statusMsg(`Successfully staked ${staked}𝒲.<br>
+					${staked}𝒲x will be sent to your wallet within 48 hours.`))
 
 				} else {
-					return res.status(400).end(statusMsg(`You can't stake ${staked}wow!<br> The minimum WOW that can be staked is ${config.minimum_stake}.
+					return res.status(400).end(statusMsg(`You can't stake ${staked}𝒲!<br> The minimum WOW that can be staked is ${config.minimum_stake}.
 					<br><a href="stake.html"><button>Back</button></a>`))
 				}
 			})
@@ -172,14 +190,17 @@ Maybe you didn't lock the transaction properly.<br><a href="stake.html"><button>
 			var txt = ""
 			var doc = fs.readFileSync("./public/list.html").toString()
 			var datb = db.get_db()
+			var ttl = 0;
 			for (i in datb) {
 				txt += `<tr><td class=small>${datb[i].amount}</td>
 <td class=mini>${datb[i].txid}</td><td class=mini>${datb[i].tx_key}</td><td class=mini>${datb[i].address}</td>
 <td class=mini>${datb[i].avax}</td><td >${utils.bool2emoji(datb[i].was_sent)}</td></tr>`
-
+				ttl += datb[i].amount;
 			}
-			theList = statusMsg(doc.replace("%t", txt))
-			return res.status(200).end(theList)
+			theList = statusMsg(doc.replace("%list", txt).replace("%total", ttl))
+			res.status(200).end(theList)
+			if (DEBUG) theList = null;
+			return;
 		}
 
 	})

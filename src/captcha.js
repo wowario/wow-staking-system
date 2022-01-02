@@ -5,7 +5,7 @@ svgCaptcha.options.height = 256
 
 svgCaptcha.options.ignoreChars = "0OIlkKW"
 const captchaOptions = {
-	"size": 7,
+	"size": 4,
 	"background": "black",
 	"stroke": "white",
 	"truncateLineProbability": 0.1,
