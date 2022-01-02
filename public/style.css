@@ -250,12 +250,20 @@ code {
 li {
 	margin-top: 10px;
 }
-th, td {
-	border: 2px solid #444;
-	margin: 0px;
-	
+td,
+th {
+	padding:10px;
+	border:2px solid #444;
+	margin:0
 }
 table {
-	border-spacing:0; /* Removes the cell spacing via CSS */
-	border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
+	width:95%;
+	border-spacing:0;
+	border-collapse:collapse;
+	table-layout: fixed;
+	overflow-wrap: break-word;
+}
+
+tr:nth-child(even) {
+	background-color:#242424
 }
